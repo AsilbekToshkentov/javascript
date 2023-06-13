@@ -143,10 +143,101 @@ const modelTrigger= document.querySelectorAll('[data-modal]'),
         }
 
     })
-    const modalTimeOut = setTimeout(openModel ,4000)
+    // const modalTimeOut = setTimeout(openModel ,4000)
     
 
-    function showModalByScroll(){
-        
+    // function showModalByScroll(){
+    //     if(
+    //         window.pageYOffset+document.documentElement.clientHeight >=
+    //         document.documentElement.scrollHeight
+    //     ){
+    //         openModel()
+    //         window.removeEventListener('scroll', showTabContent)
+    //     }
+    // }
+    // window.addEventListener('scroll', showModalByScroll)
+
+    //Class
+
+    class MenuCard{
+        constructor( src, alt,title,description,price,parentSelector, ...classes){
+            this.src=src,
+            this.alt= alt,
+            this.description = description,
+            this.title = title,
+            this.price = price,
+            this.classes = classes,
+            this.parent = document.querySelector(parentSelector),
+            this.transfer = 11000
+            this.changeTo()
+
+        }
+        changeTo(){
+            this.price = this.price * this.transfer
+        }
+        render(){
+            const element = document.createElement('div')
+
+
+            if(this.classes.length == 0){
+                this.element='menu__item'
+                element.classList.add(this.element)
+            }else{
+                this.classes.forEach((className)=> element.classList.add(className));    
+            }
+            
+
+            element.innerHTML=`
+            <img src=${this.src} alt=${this.alt} />
+            <h3 class="menu__item-subtitle">${this.title}</h3>
+            <div class="menu__item-descr">${this.description}</div>
+            <div class="menu__item-divider"></div>
+            <div class="menu__item-price">
+              <div class="menu__item-cost">Price:</div>
+              <div class="menu__item-total"><span>${this.price}</span> uzs/month</div>
+            </div>
+            `;
+
+            this.parent.append(element)
+
+        }
     }
+    new MenuCard(
+       "img/tabs/1.png",
+       "unusual",
+       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi iure, nam fuga vero eum numquam autem! Pariatur laborum voluptas adipisci debitis, atque ut fugit aperiam minus porro labore ",
+       "lorem",
+       "10",
+       '.menu .container',
+    ).render()
+    new MenuCard(
+        "img/tabs/2.jpg",
+        "unusual",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi iure, nam fuga vero eum numquam autem! Pariatur laborum voluptas adipisci debitis, atque ut fugit aperiam minus porro labore ",
+        "lorem",
+        "40",
+       '.menu .container',
+       'menu__item',
+
+     ).render()
+     new MenuCard(
+        "img/tabs/3.jpg",
+        "unusual",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi iure, nam fuga vero eum numquam autem! Pariatur laborum voluptas adipisci debitis, atque ut fugit aperiam minus porro labore ",
+        "lorem",
+        "6",
+        '.menu .container',
+       'menu__item'
+
+     ).render()
+     new MenuCard(
+        "img/tabs/4.jpg",
+        "unusual",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi iure, nam fuga vero eum numquam autem! Pariatur laborum voluptas adipisci debitis, atque ut fugit aperiam minus porro labore ",
+        "lorem",
+        "4",
+        '.menu .container',
+       'menu__item',
+
+     ).render()
 });
