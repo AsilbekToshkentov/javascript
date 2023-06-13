@@ -104,4 +104,49 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 }
     setClock(".timer", deadline);
+
+//Modal
+
+const modelTrigger= document.querySelectorAll('[data-modal]'),
+      modal =document.querySelector('.modal'),
+      modalCloseBtn=document.querySelector('[data-close]');
+
+      function openModel(){
+        modal.classList.add('show')
+        modal.classList.remove('hide')
+        document.body.style.overflow='hidden'
+        clearInterval(modalTimeOut)
+      }
+
+      function closeModel(){
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+        document.body.style.overflow=''        
+      }
+
+    modelTrigger.forEach(trigger=>{
+        trigger.addEventListener('click', openModel);
+    });
+
+    
+    modalCloseBtn.addEventListener('click', closeModel);
+
+      modal.addEventListener('click', (event)=>{
+           if(event.target==modal){
+           closeModel()
+           }
+      })
+
+    document.addEventListener('keydown',(e)=>{
+        if(e.code=='Escape' && modal.classList.contains('show')){
+            closeModel()
+        }
+
+    })
+    const modalTimeOut = setTimeout(openModel ,4000)
+    
+
+    function showModalByScroll(){
+        
+    }
 });
